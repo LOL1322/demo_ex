@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS users(
     id INTEGER PRIMARY KEY,
-    personnel_id INTEGER NOT NULL,
-    login VARCHAR(40)NOT NULL,
+    personnel_id INTEGER NOT NULL UNIQUE,
+    login VARCHAR(40) NOT NULL UNIQUE,
     password VARCHAR(120) NOT NULL,
     FOREIGN KEY(personnel_id)
         REFERENCES personnel(id)
@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS personnel(
     id INTEGER PRIMARY KEY,
     position_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER UNIQUE,
     name VARCHAR(100) NOT NULL,
     surname VARCHAR(100) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
+    phone VARCHAR(20) NOT NULL UNIQUE,
     date_birth VARCHAR(100) NOT NULL,
     FOREIGN KEY(position_id)
         REFERENCES positions(id),
@@ -23,12 +23,12 @@ CREATE TABLE IF NOT EXISTS personnel(
 
 CREATE TABLE IF NOT EXISTS positions(
     id INTEGER PRIMARY KEY,
-    position VARCHAR(100) NOT NULL
+    position VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS firms(
     id INTEGER PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
+    title VARCHAR(100) NOT NULL UNIQUE,
     location VARCHAR(100) NOT NULL
 );
 
@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS expeditions(
 CREATE TABLE IF NOT EXISTS fossils(
     id INTEGER PRIMARY KEY,
     expedition_id INTEGER NOT NULL,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL UNIQUE,
     date_of_discovery VARCHAR(100) NOT NULL,
-    age VARCHAR(100) NOT NULL,
+    age VARCHAR(100),
     quantity INTEGER NOT NULL,
     FOREIGN KEY(expedition_id)
         REFERENCES expeditions(id)
