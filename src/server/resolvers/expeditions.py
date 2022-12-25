@@ -7,7 +7,7 @@ def create_expedition(expedition: Expedition):
                                args=(expedition.firm_id, expedition.date, expedition.location))
 
 
-def get_expedition(expedition_id: int ):
+def get_expedition(expedition_id: int):
     return base_worker.execute_query(query="SELECT id, date, location FROM expeditions WHERE id = ?",
                                      args=(expedition_id,))
 
@@ -25,6 +25,3 @@ def update_expedition(expedition_id: int, new_data: Expedition):
 def delete_expedition(expedition_id: int):
     return base_worker.execute_query(query="DELETE FROM expeditions WHERE id=?",
                                      args=(expedition_id,))
-
-
-
