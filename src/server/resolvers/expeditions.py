@@ -3,8 +3,9 @@ from server.sql_base.models import Expedition
 
 
 def create_expedition(expedition: Expedition):
-    return base_worker.execute(query="INSERT INTO expeditions(firm_id, date, location) VALUES (?, ?, ?) RETURNING id",
-                               args=(expedition.firm_id, expedition.date, expedition.location))
+    return base_worker.execute_query(
+        query="INSERT INTO expeditions(firm_id, date, location) VALUES (?, ?, ?) RETURNING id",
+        args=(expedition.firm_id, expedition.date, expedition.location))
 
 
 def get_expedition(expedition_id: int):
@@ -14,7 +15,7 @@ def get_expedition(expedition_id: int):
 
 def get_all_expeditions():
     return base_worker.execute_query(query="SELECT id, date, location FROM expeditions",
-                                     many=True)
+                                     fetchone=False)
 
 
 def update_expedition(expedition_id: int, new_data: Expedition):

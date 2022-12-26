@@ -39,6 +39,6 @@ class Position(BaseModelModify):
 
 
 class User(BaseModelModify):
-    personnel_id: int
+    personnel_id: Optional[int]
     login: str
     password: str

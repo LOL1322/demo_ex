@@ -23,13 +23,12 @@ class DbManager:
         connect.commit()
         connect.close()
 
-    def execute_query(self, query: str, fetchone: bool = True,
-                      args: tuple = None):  # Функция выполния запроса и выборки по всем данным таблицы и присвоение переменной args тип даных кортеж и значение картежа по умолчанию None
+    def execute_query(self, query: str, fetchone: bool = True, args: tuple = None):  # Функция выполния запроса и выборки по всем данным таблицы и присвоение переменной args тип даных кортеж и значение картежа по умолчанию None
         connect, cursor, = self.connect_db()
 
         try:  # Если fethone try то выполниться запрос на определенную строку таблицы иначе выполнятся запрос по всей таблицы
             if fetchone:
-                res = connect.execute(query, args).fetchone()
+                res = cursor.execute(query, args).fetchone()
             else:
                 res = cursor.execute(query).fetchall()
         except:  # Обработка иключений точнее ошибок
